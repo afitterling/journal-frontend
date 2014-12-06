@@ -1,17 +1,28 @@
 angular.module('famousAngular')
-  .controller('TagCtrl', ['$log', '$scope', '$resource', '$http',
-    function ($log, $scope, $resource, $http) {
+  .controller('TagCtrl', ['$log', '$scope', '$resource', '$http', 'auth',
+    function ($log, $scope, $resource, $http, auth) {
       //
       var self = this;
 
       $scope.addTag = function (tag) {
         console.log(tag);
         $scope.tags.push(tag);
-        return true;
+        tag.user_id = auth.profile.user_id;
+        var status = null;
+        $scope.Tags.save({tag: tag}, function (data) {
+          // success
+          $scope.modalItem.tags.push(data);
+          status = true;
+        });
+
+        return status;
       };
 
       $scope.deleteTag = function (tag) {
-        $scope.tags.splice($scope.tags.indexOf(tag), 1);
+        $scope.Tags.delete({id: tag.id}, function (data) {
+          // success
+          $scope.tags.splice($scope.tags.indexOf(tag), 1);
+        });
       };
 
       $scope.removeTag = function (tag) {

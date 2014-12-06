@@ -13,10 +13,10 @@
                 <div class="modal-body">
                     <form name="tagForm" ng-submit="addTag(tag) && (tag=null)" novalidate>
                         <div class="input-group">
-                            <input type="text" ng-model="tag.name" name="name" class="form-control">
+                            <input type="text" ng-model="tag.name" name="name" ng-required="true" class="form-control">
                           <span class="input-group-btn">
                               <!-- @TODO check if name is already on server -->
-                            <button class="btn btn-default" type="button" ng-disabled="true">
+                            <button class="btn btn-default" type="button">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                           </span>
@@ -62,8 +62,8 @@
 
     <div class="row" ng-show="tags.length">
         <h2>filter bar</h2>
-        <button ng-click="active[tag.id]=!active[tag.id]" ng-repeat="tag in tags" class="btn btn-default btn-md"
-                ng-class="{'active': active[tag.id]}">{{tag.name}}</button>
+        <button ng-click="tagFilter.active[tag.id]=!tagFilter.active[tag.id]" ng-repeat="tag in tags" class="btn btn-default btn-md"
+                ng-class="{'active': tagFilter.active[tag.id]}">{{tag.name}}</button>
         <br>
         <br>
     </div>

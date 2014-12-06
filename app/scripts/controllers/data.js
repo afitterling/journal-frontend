@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('famousAngular')
-  .controller('DataCtrl', ['$rootScope', '$timeout', '$log', '$scope', '$resource', '$http', 'Items', 'AppStore',
-    function ($rootScope, $timeout, $log, $scope, $resource, $http, Items, AppStore) {
+  .controller('DataCtrl', ['$rootScope', '$timeout', '$log', '$scope', '$resource', '$http', 'Items', 'auth',
+    function ($rootScope, $timeout, $log, $scope, $resource, $http, Items, auth) {
 
     var conf = $scope.conf;
 
@@ -70,11 +70,10 @@ angular.module('famousAngular')
       $('#tagModal').modal();
     };
 
-    self.Tags = $resource($scope.conf.API_BASEURL + '/items');
+    $scope.Tags = $resource($scope.conf.API_BASEURL + '/tags/:id', {id: '@id'});
 
-    self.Tags.query({}, function (success) {
-      console.log(success);
-      $scope.tags = [];
+    $scope.Tags.query({user_id: auth.profile.user_id}, function (success) {
+      $scope.tags = success;
     });
 
   }]);
