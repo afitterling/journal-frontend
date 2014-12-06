@@ -13,15 +13,25 @@ angular.module('famousAngular.formHelpers.editables', [])
         actions: '=',
         updateFunc: '&',
         // -------------------
-        deleteFunc: '&'
+        deleteFunc: '&',
+        modalFunc: '&'
       },
       link: function (scope, elm, attrs) {
+        angular.forEach(scope.actions, function (action) {
+//          console.log(action);
+//          if (angular.isDefined(action['data-target'])) {
+////            elm.attr('data-target', action['data-target']);
+////            console.log(elm);
+//          }
+        });
         // run callbacks given by params
         // but they need to be designed as & in scope beforehand
         scope.runCallback = function (callback, item) {
           var fn = scope[callback];
           var fnParams = [{item: item}];
-          fn.apply(null, fnParams);
+          if (angular.isDefined(callback)){
+            fn.apply(null, fnParams);
+          }
         };
       }
     };

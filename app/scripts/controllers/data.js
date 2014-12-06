@@ -61,4 +61,9 @@ angular.module('famousAngular')
       });
     };
 
+    $scope.openTagModal = function(item) {
+      console.log(item);
+      $('#tagModal').modal();
+    };
+
   }]);

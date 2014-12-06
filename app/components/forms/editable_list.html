@@ -5,7 +5,12 @@
         </td>
         <td style="width: 20%;">
             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                <button type="button" class="btn btn-default" ng-click="runCallback(action.callback, item)" ng-repeat="action in actions">{{action.name}}</button>
+                <button type="button" class="btn btn-default" ng-class="action.class" ng-click="runCallback(action.callback, item, modal)"
+                        ng-repeat="action in actions"
+                        data-toggle="{{action['data-toggle']}}"
+                        data-target="{{action['data-target']}}">
+                    <span class="glyphicon" ng-class="action.icon">{{action.text}}</span>
+                </button>
             </div>
         </td>
     </tr>
