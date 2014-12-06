@@ -5,3 +5,4 @@ angular.module('famousAngular')
     function ($log, $scope, $resource, $http) {
     //
 }]);
+
