@@ -63,6 +63,10 @@ angular.module('famousAngular')
 
     $scope.openTagModal = function (item) {
       console.log(item);
+      $scope.modalItem = item;
+      if (angular.isUndefined($scope.modalItem.tags)) {
+        $scope.modalItem.tags = [];
+      }
       $('#tagModal').modal();
     };
 

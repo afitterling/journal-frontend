@@ -14,8 +14,14 @@ angular.module('famousAngular')
         $scope.tags.splice($scope.tags.indexOf(tag), 1);
       };
 
+      $scope.removeTag = function (tag) {
+        $scope.modalItem.tags.splice($scope.modalItem.tags.indexOf(tag), 1);
+      };
+
       $scope.tagItem = function (tag) {
+        if ($scope.modalItem.tags.indexOf(tag) >= 0){ return; }
         console.log(tag);
+        $scope.modalItem.tags.push(tag);
       };
     }]);
 
