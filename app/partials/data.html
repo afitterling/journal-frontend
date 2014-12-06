@@ -4,11 +4,44 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">tag items</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">create tag</h4>
                 </div>
                 <div class="modal-body">
-                    tag it ........
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                          </span>
+                        </div>
+                        <!-- /input-group -->
+                </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">tag this item with available tags</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="label label-info">Label1 <span class="glyphicon glyphicon-remove"
+                                                                ng-click=""></span></span>
+                    <span class="label label-info">Label1 <span class="glyphicon glyphicon-remove"
+                                                                ng-click=""></span></span>
+                    <span class="label label-info">Label1 <span class="glyphicon glyphicon-remove"
+                                                                ng-click=""></span></span>
+                    <span class="label label-info">Label1 <span class="glyphicon glyphicon-remove"
+                                                                ng-click=""></span></span>
+                </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">tagged with</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="label label-info">Label1 <span class="glyphicon glyphicon-remove"
+                                                                ng-click=""></span></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -37,10 +70,13 @@
                 <div class="form-group">
                     <label for="itemDesc">Add an Item</label>
                     <span class="text-info" ng-show="!formAdd.itemDesc.$valid">(Need at least one letter)</span>
+
                     <div class="input-group" submit-state state-flag="success">
-                        <input ng-disabled="pending" type="text" name="itemDesc" ng-model="item.desc" ng-required="true" class="form-control">
+                        <input ng-disabled="pending" type="text" name="itemDesc" ng-model="item.desc" ng-required="true"
+                               class="form-control">
                         <span class="input-group-btn">
-                            <button class="btn btn-default btn-success" ng-disabled="!formAdd.$valid || pending" type="submit">
+                            <button class="btn btn-default btn-success" ng-disabled="!formAdd.$valid || pending"
+                                    type="submit">
                                 <span ng-hide="pending">Add!</span>
                                 <span ng-show="pending">Wait</span>
                             </button>
