@@ -72,7 +72,7 @@ angular.module('famousAngular')
 
     self.Tags = $resource($scope.conf.API_BASEURL + '/items');
 
-    self.Tags.query({}, function(success){
+    self.Tags.query({}, function (success) {
       console.log(success);
       $scope.tags = [];
     });
