@@ -60,6 +60,13 @@
         </div>
     </div>
 
+    <div class="row" ng-show="tags.length">
+        <h2>filter bar</h2>
+        <button ng-click="active[tag.id]=!active[tag.id]" ng-repeat="tag in tags" class="btn btn-default btn-md"
+                ng-class="{'active': active[tag.id]}">{{tag.name}}</button>
+        <br>
+        <br>
+    </div>
     <!-- editable list to display editable tables -->
     <div class="row">
         <div class="col-lg-6">
