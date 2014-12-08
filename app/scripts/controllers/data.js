@@ -83,8 +83,12 @@ angular.module('famousAngular')
       $scope.tags = success;
     });
 
-    $scope.filterTagsSelected = [];
-    $scope.tagFilter = { active: []};
+    $scope.resetFilter = function () {
+      $scope.filterTagsSelected = [];
+      $scope.tagFilter = { active: []};
+    };
+
+    $scope.resetFilter(); // first run reset
 
     $scope.toggleTagFilter = function (tag) {
 //      console.log('abc', tag);
