@@ -72,7 +72,7 @@ angular.module('famousAngular')
       $timeout(function(){
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
-        }, 200);
+        }, 2000);
       });
 
     };
