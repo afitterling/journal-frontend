@@ -16,7 +16,7 @@
                             <input type="text" ng-model="tag.name" name="name" ng-required="true" class="form-control">
                           <span class="input-group-btn">
                               <!-- @TODO check if name is already on server -->
-                            <button class="btn btn-default" type="button">
+                            <button class="btn btn-default" type="button" ng-click="addTag(tag) && (tag=null)" ng-class="{'btn-success': tagForm.$valid}">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                           </span>

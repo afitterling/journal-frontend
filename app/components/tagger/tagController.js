@@ -6,12 +6,13 @@ angular.module('famousAngular')
 
       $scope.addTag = function (tag) {
         console.log(tag);
-        $scope.tags.push(tag);
+//        $scope.tags.push(tag);
         tag.user_id = auth.profile.user_id;
         var status = null;
         $scope.Tags.save({tag: tag}, function (data) {
           // success
-          $scope.modalItem.tags.push(data);
+//          $scope.modalItem.tags.push(data);
+          $scope.tags.push(data);
           status = true;
         });
 
@@ -31,7 +32,8 @@ angular.module('famousAngular')
 
 
       $scope.tagItem = function (tag) {
-        var Tagger = $resource($scope.conf.API_BASEURL + '/items/' + $scope.modalItem.id + '/tag', {id: '@id'});
+        console.log(tag);
+        var Tagger = $resource($scope.conf.API_BASEURL + '/items/' + $scope.modalItem.id + '/tag');
         if ($scope.modalItem.tags.indexOf(tag) >= 0) {
           return;
         }
