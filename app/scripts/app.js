@@ -101,8 +101,8 @@ angular.module('famousAngular',
 
       $stateProvider
         .state('data', {
-          url: '/data',
-          templateUrl: 'partials/data.html',
+          url: '/entries',
+          templateUrl: 'partials/entries.html',
           //controller: 'DataCtrl', // see the partial ng-ctrl
           resolve: {
             conf: ['Settings', function (Settings) {
