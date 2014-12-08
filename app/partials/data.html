@@ -11,7 +11,7 @@
                     <h4 class="modal-title" id="myModalLabel">Tags</h4>
                 </div>
                 <div class="modal-body">
-                    <!--<h4 class="modal-title" id="myModalLabel">generic new tag</h4>-->
+                    <h4 class="modal-title" id="myModalLabel">new tag</h4>
                     <form name="tagForm" ng-submit="addTag(tag)" novalidate>
                         <div class="input-group">
                             <input type="text" ng-model="tag.name" name="name" ng-required="true" class="form-control">
@@ -28,9 +28,10 @@
                 <div class="modal-header">
                     <!--<button type="button" class="close" data-dismiss="modal"><span-->
                             <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
-                    <h4 class="modal-title" id="myModalLabel">available tags</h4>
                 </div>
                 <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel" ng-show="!tags.length">no tags available</h4>
+                    <h4 class="modal-title" id="myModalLabel" ng-show="tags.length">available tags</h4>
                     <span ng-repeat-start="tag in tags" class="label label-info">
                         <span ng-click="tagItem(tag)" data-toggle="tooltip" data-placement="top" title="click to tag!">{{tag.name}}</span>&nbsp;<span class="text-danger glyphicon glyphicon-remove"
                                                                 ng-click="deleteTag(tag)" data-toggle="tooltip" data-placement="top" title="click to remove!"></span></span>
@@ -45,15 +46,15 @@
                 <div class="modal-header">
                     <!--<button type="button" class="close" data-dismiss="modal"><span-->
                             <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
-                    <h4 class="modal-title" id="myModalLabel">currently tagged</h4>
                 </div>
                 <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel" ng-show="!modalItem.tags.length">entry currently not tagged</h4>
+                    <h4 class="modal-title" id="myModalLabel" ng-show="modalItem.tags.length">entry tagged with</h4>
                     <span ng-repeat-start="tag in modalItem.tags" class="label label-info">
                         <span ng-click="tagItem(tag)">{{tag.name}}</span>&nbsp;<span class="text-danger glyphicon glyphicon-remove"
                                                                                 ng-click="removeTag(tag)"
-                                                                                data-toggle="tooltip" data-placement="top" title="click to remove!"></span>
-                    </span>
-                    <span ng-repeat-end ng-hide="$last"> </span>
+                                                                                data-toggle="tooltip" data-placement="top" title="click to remove!"></span></span>
+                    <span ng-repeat-end ng-hide="$last"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -64,10 +65,12 @@
     </div>
 
     <div class="row" ng-show="tags.length">
-        <button ng-click="toggleTagFilter(tag)" ng-repeat="tag in tags" class="btn btn-default btn-info btn-sm"
-                ng-class="{'active': tagFilter.active[tag.id]}">{{tag.name}}</button>
-        <br>
-        <br>
+        <div class="col-lg-6">
+            <button ng-click="toggleTagFilter(tag)" ng-repeat="tag in tags" class="btn btn-default btn-info btn-sm"
+                    ng-class="{'active': tagFilter.active[tag.id]}">{{tag.name}}</button>
+            <br>
+            <br>
+        </div>
     </div>
     <!-- editable list to display editable tables -->
     <div class="row">
