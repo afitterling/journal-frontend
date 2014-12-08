@@ -21,8 +21,12 @@ angular.module('famousAngular')
 
         var taggedItem;
         // @FIXME tags with array one post!
+        var tag_ids = [];
         angular.forEach($scope.filterTagsSelected, function(tag){
-          taggedItem = Tagger.tag({tag_id: tag.id}, function(){});
+          tag.ids.push(tag.id);
+        }, tag_ids);
+        Tagger.tag({tag_ids: tag_ids}, function () {
+          //
         });
 
         self.items.push(taggedItem);
