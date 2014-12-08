@@ -17,19 +17,19 @@ angular.module('famousAngular')
       /* jshint camelcase: false */
       item.user_id = $scope.profile.user_id;
       items.save({item: item}, function (success) {
-        var Tagger = $resource($scope.conf.API_BASEURL + '/items/' + $scope.item.id + '/tag');
+
+        var Tagger = $resource($scope.conf.API_BASEURL + '/items/' + success.id + '/tags');
 
         var taggedItem;
-        // @FIXME tags with array one post!
-        var tag_ids = [];
-        angular.forEach($scope.filterTagsSelected, function(tag){
-          tag.ids.push(tag.id);
-        }, tag_ids);
-        Tagger.tag({tag_ids: tag_ids}, function () {
-          //
-        });
 
-        self.items.push(taggedItem);
+        var tag_ids = [];
+        angular.forEach($scope.filterTagsSelected, function (tag) {
+          this.push(tag.id);
+        }, tag_ids);
+        Tagger.save({tag_ids: tag_ids}, function (success) {
+          //
+          self.items.push(success);
+        });
         $scope.success = true;
         $scope.item = {};
       }, function (error) {
