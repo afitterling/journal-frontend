@@ -77,6 +77,13 @@ angular.module('famousAngular')
         $scope.modalItem.tags = [];
       }
       $('#tagModal').modal();
+
+      $timeout(function(){
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        }, 2000);
+      });
+
     };
 
     $scope.Tags = $resource($scope.conf.API_BASEURL + '/tags/:id', {id: '@id'});
@@ -85,8 +92,12 @@ angular.module('famousAngular')
       $scope.tags = success;
     });
 
-    $scope.filterTagsSelected = [];
-    $scope.tagFilter = { active: []};
+    $scope.resetFilter = function () {
+      $scope.filterTagsSelected = [];
+      $scope.tagFilter = { active: []};
+    };
+
+    $scope.resetFilter(); // first run reset
 
     $scope.toggleTagFilter = function (tag) {
 //      console.log('abc', tag);

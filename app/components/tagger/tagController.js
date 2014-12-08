@@ -13,6 +13,7 @@ angular.module('famousAngular')
           // success
 //          $scope.modalItem.tags.push(data);
           $scope.tags.push(data);
+          $scope.tag = {};
           status = true;
         });
 
