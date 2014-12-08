@@ -68,6 +68,13 @@ angular.module('famousAngular')
         $scope.modalItem.tags = [];
       }
       $('#tagModal').modal();
+
+      $timeout(function(){
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        }, 200);
+      });
+
     };
 
     $scope.Tags = $resource($scope.conf.API_BASEURL + '/tags/:id', {id: '@id'});
