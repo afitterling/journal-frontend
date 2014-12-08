@@ -67,7 +67,7 @@
     <div class="row" ng-show="tags.length">
         <div class="col-lg-6">
             <button ng-click="resetFilter()" ng-show="filterTagsSelected.length" class="btn btn-default btn-warning btn-sm"
-                    ng-class="">disable activated</button>
+                    ng-class="">reset</button>
             <button ng-click="toggleTagFilter(tag)" ng-repeat="tag in tags" class="btn btn-default btn-info btn-sm"
                     ng-class="{'active': tagFilter.active[tag.id]}">{{tag.name}}</button>
             <br>
