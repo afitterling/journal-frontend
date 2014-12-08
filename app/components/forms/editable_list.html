@@ -1,5 +1,5 @@
 <table class="table table-hover">
-    <tr ng-repeat="item in items">
+    <tr ng-repeat="item in items | filter:$parent.filterOptions['tagged']">
         <td ng-repeat="column in columns" ng-click="editField(column)">
             <editable model="item" column="column"></editable>
         </td>

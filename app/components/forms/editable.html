@@ -1,5 +1,7 @@
 <td ng-click="toggleState()">
     <span ng-hide="editState">{{model[column]}}</span>
+    <!-- if array show this one -->
+    <!--<span ng-repeat="item in model[column]">{{item.name}}</span>-->
     <span ng-show="editState">
             <form name="formItem" ng-submit="endEditMode()">
                 <div class="input-group">

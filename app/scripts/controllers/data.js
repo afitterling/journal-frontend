@@ -62,7 +62,7 @@ angular.module('famousAngular')
     };
 
     $scope.openTagModal = function (item) {
-      console.log(item);
+//      console.log(item);
       $scope.modalItem = item;
       if (angular.isUndefined($scope.modalItem.tags)) {
         $scope.modalItem.tags = [];
@@ -75,5 +75,53 @@ angular.module('famousAngular')
     $scope.Tags.query({user_id: auth.profile.user_id}, function (success) {
       $scope.tags = success;
     });
+
+    $scope.filterTagsSelected = [];
+    $scope.tagFilter = { active: []};
+
+    $scope.toggleTagFilter = function (tag) {
+//      console.log('abc', tag);
+//      console.log($scope.filterTagsSelected);
+      if ($scope.filterTagsSelected.indexOf(tag) >= 0) {
+        $scope.filterTagsSelected.splice($scope.filterTagsSelected.indexOf(tag), 1);
+//        console.log('selected Filters:', $scope.filterTagsSelected);
+        $scope.tagFilter.active[tag.id] = undefined;
+        return;
+      }
+
+      if ($scope.filterTagsSelected.indexOf(tag) === -1) {
+        $scope.filterTagsSelected.push(tag);
+//        console.log('selected Filters:', $scope.filterTagsSelected);
+        $scope.tagFilter.active[tag.id] = true;
+      }
+
+    };
+
+    // .............
+    $scope.filterOptions = {
+      'tagged': function (item) {
+        var found = false;
+
+        angular.forEach($scope.filterTagsSelected, function (filterSelectedItem) {
+//          console.log(item.tags);
+          angular.forEach(item.tags, function (tag) {
+            if (tag.id === filterSelectedItem.id) {
+//              console.log('found');
+              found = true;
+            }
+
+          });
+        });
+
+        if ($scope.filterTagsSelected.length === 0) { found = true; }
+
+        return found;
+      }
+    };
+
+    $scope.filterFromTags = function (arg) {
+//      console.log(arg);
+      return false;
+    };
 
   }]);

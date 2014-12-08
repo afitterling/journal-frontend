@@ -62,7 +62,7 @@
 
     <div class="row" ng-show="tags.length">
         <h2>filter bar</h2>
-        <button ng-click="tagFilter.active[tag.id]=!tagFilter.active[tag.id]" ng-repeat="tag in tags" class="btn btn-default btn-md"
+        <button ng-click="toggleTagFilter(tag)" ng-repeat="tag in tags" class="btn btn-default btn-md"
                 ng-class="{'active': tagFilter.active[tag.id]}">{{tag.name}}</button>
         <br>
         <br>

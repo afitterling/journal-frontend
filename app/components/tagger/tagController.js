@@ -29,10 +29,18 @@ angular.module('famousAngular')
         $scope.modalItem.tags.splice($scope.modalItem.tags.indexOf(tag), 1);
       };
 
+
       $scope.tagItem = function (tag) {
-        if ($scope.modalItem.tags.indexOf(tag) >= 0){ return; }
+        var Tagger = $resource($scope.conf.API_BASEURL + '/items/' + $scope.modalItem.id + '/tag', {id: '@id'});
+        if ($scope.modalItem.tags.indexOf(tag) >= 0) {
+          return;
+        }
         console.log(tag);
-        $scope.modalItem.tags.push(tag);
+        Tagger.save({tag_id: tag.id}, function (success) {
+          console.log(success);
+          $scope.modalItem.tags.push(tag);
+        });
+
       };
     }]);
 
