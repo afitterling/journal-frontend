@@ -28,7 +28,10 @@ angular.module('famousAngular')
       };
 
       $scope.removeTag = function (tag) {
-        $scope.modalItem.tags.splice($scope.modalItem.tags.indexOf(tag), 1);
+        var Tagger = $resource($scope.conf.API_BASEURL + '/items/' + $scope.modalItem.id + '/untag');
+        Tagger.delete({tag_id: tag.id}, function () {
+          $scope.modalItem.tags.splice($scope.modalItem.tags.indexOf(tag), 1);
+        });
       };
 
 
