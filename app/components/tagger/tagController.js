@@ -3,7 +3,6 @@ angular.module('famousAngular')
     function ($log, $scope, $resource, $http, auth) {
 
       $scope.addTag = function (tag) {
-        console.log(tag);
         tag.user_id = auth.profile.user_id;
         var status = null;
         $scope.Tags.save({tag: tag}, function (data) {
@@ -40,14 +39,12 @@ angular.module('famousAngular')
       };
 
       $scope.tagItem = function (tag) {
-        console.log(tag);
         var Tagger = $resource($scope.conf.API_BASEURL + '/items/' + $scope.modalItem.id + '/tag');
         if ($scope.modalItem.tags.indexOf(tag) >= 0) {
           return;
         }
-        console.log(tag);
-        Tagger.save({tag_id: tag.id}, function (success) {
-          console.log(success);
+        Tagger.save({tag_id: tag.id}, function () {
+          // success
           $scope.modalItem.tags.push(tag);
         });
 
