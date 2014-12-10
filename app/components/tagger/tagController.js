@@ -1,22 +1,17 @@
 angular.module('famousAngular')
   .controller('TagCtrl', ['$log', '$scope', '$resource', '$http', 'auth',
     function ($log, $scope, $resource, $http, auth) {
-      //
-      var self = this;
 
       $scope.addTag = function (tag) {
         console.log(tag);
-//        $scope.tags.push(tag);
         tag.user_id = auth.profile.user_id;
         var status = null;
         $scope.Tags.save({tag: tag}, function (data) {
           // success
-//          $scope.modalItem.tags.push(data);
           $scope.tags.push(data);
           $scope.tag = {};
           status = true;
         });
-
         return status;
       };
 
@@ -38,7 +33,6 @@ angular.module('famousAngular')
           $scope.modalItem.tags.splice($scope.modalItem.tags.indexOf(tag), 1);
         });
       };
-
 
       $scope.tagItem = function (tag) {
         console.log(tag);
