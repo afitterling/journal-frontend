@@ -143,7 +143,6 @@ angular.module('famousAngular')
       }
     };
 
-
     // cleanup item from tag
     $scope.cleanUpItemsFromTag = function (tag) {
       // search all items
@@ -156,10 +155,6 @@ angular.module('famousAngular')
           }
         });
       });
-    };
-
-    $scope.filterFromTags = function (arg) {
-      return false;
     };
 
   }]);
