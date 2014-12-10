@@ -20,19 +20,17 @@ angular.module('famousAngular')
 
         var Tagger = $resource($scope.conf.API_BASEURL + '/items/' + success.id + '/tags');
 
-        var taggedItem;
-
         var tag_ids = [];
         angular.forEach($scope.filterTagsSelected, function (tag) {
           this.push(tag.id);
         }, tag_ids);
         Tagger.save({tag_ids: tag_ids}, function (success) {
-          //
+          //success
           self.items.push(success);
         });
         $scope.success = true;
         $scope.item = {};
-      }, function (error) {
+      }, function () {
         $scope.success = false;
         $scope.item = item;
 
@@ -52,14 +50,14 @@ angular.module('famousAngular')
           cancelUpdate[item.id]();
         }
       }
-      cancelUpdate[item.id] = $timeout(function(){
+      cancelUpdate[item.id] = $timeout(function () {
         $log.debug('update triggered', item);
         $scope.success = null;
-        items.update(item, function (success) {
+        items.update(item, function () {
           $scope.success = true;
           delete cancelUpdate[item.id]; // delete the promise from list as we know it ran through
           $log.debug('cancelUpdate', cancelUpdate);
-        }, function (error) {
+        }, function () {
           $scope.success = false;
           $log.debug('cancelUpdate', cancelUpdate);
         });
@@ -68,14 +66,13 @@ angular.module('famousAngular')
     };
 
     $scope.deleteItem = function (item) {
-      items.delete({id: item.id}, function(success){
+      items.delete({id: item.id}, function () {
         self.items.splice(self.items.indexOf(item), 1);
         $log.debug('deleted item', item);
       });
     };
 
     $scope.openTagModal = function (item) {
-//      console.log(item);
       $scope.modalItem = item;
       if (angular.isUndefined($scope.modalItem.tags)) {
         $scope.modalItem.tags = [];
@@ -84,7 +81,7 @@ angular.module('famousAngular')
 
       $timeout(function(){
         $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
+          $('[data-toggle="tooltip"]').tooltip();
         }, 2000);
       });
 
@@ -104,36 +101,28 @@ angular.module('famousAngular')
     $scope.resetFilter(); // first run reset
 
     $scope.toggleTagFilter = function (tag) {
-//      console.log('abc', tag);
-//      console.log($scope.filterTagsSelected);
       if ($scope.filterTagsSelected.indexOf(tag) >= 0) {
         $scope.filterTagsSelected.splice($scope.filterTagsSelected.indexOf(tag), 1);
-//        console.log('selected Filters:', $scope.filterTagsSelected);
         $scope.tagFilter.active[tag.id] = undefined;
         return;
       }
 
       if ($scope.filterTagsSelected.indexOf(tag) === -1) {
         $scope.filterTagsSelected.push(tag);
-//        console.log('selected Filters:', $scope.filterTagsSelected);
         $scope.tagFilter.active[tag.id] = true;
       }
 
     };
 
-    // .............
+    // dyn filter on items
     $scope.filterOptions = {
       'tagged': function (item) {
         var found = false;
-
         angular.forEach($scope.filterTagsSelected, function (filterSelectedItem) {
-//          console.log(item.tags);
           angular.forEach(item.tags, function (tag) {
             if (tag.id === filterSelectedItem.id) {
-//              console.log('found');
               found = true;
             }
-
           });
         });
 
