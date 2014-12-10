@@ -143,8 +143,26 @@ angular.module('famousAngular')
       }
     };
 
+
+    // cleanup item from tag
+    $scope.cleanUpItemsFromTag = function (tag) {
+      // search all items
+      angular.forEach(self.items, function (item, iidx) {
+        // if any item has tags
+        if (angular.isDefined(item.tags)) {
+          // step through them
+          angular.forEach(item.tags, function (itag, itidx) {
+            // and remove erased tag
+            if (angular.equals(tag, itag)) {
+//              self.items[self.items.indexOf(item)].tags.splice(item.tags.indexOf(tag), 1);
+              self.items[iidx].tags.splice(itidx, 1);
+            }
+          });
+        }
+      });
+    };
+
     $scope.filterFromTags = function (arg) {
-//      console.log(arg);
       return false;
     };
 

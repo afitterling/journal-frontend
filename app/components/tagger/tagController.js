@@ -27,6 +27,7 @@ angular.module('famousAngular')
           if ($scope.filterTagsSelected.indexOf(tag) !== -1) {
             $scope.filterTagsSelected.splice($scope.filterTagsSelected.indexOf(tag), 1);
             $scope.tagFilter.active[tag.id] = undefined;
+            $scope.cleanUpItemsFromTag(tag);
           }
         });
       };
