@@ -16,13 +16,18 @@ angular.module('famousAngular')
       };
 
       $scope.deleteTag = function (tag) {
-        $scope.Tags.delete({id: tag.id}, function (data) {
+        $scope.Tags.delete({id: tag.id}, function () {
           // success
           $scope.tags.splice($scope.tags.indexOf(tag), 1);
           if ($scope.filterTagsSelected.indexOf(tag) !== -1) {
             $scope.filterTagsSelected.splice($scope.filterTagsSelected.indexOf(tag), 1);
             $scope.tagFilter.active[tag.id] = undefined;
-            $scope.cleanUpItemsFromTag(tag);
+            // clean up all items
+          }
+          $scope.cleanUpItemsFromTag(tag);
+          // remove also from modal item
+          if ($scope.modalItem.tags.indexOf(tag) !== -1) {
+            $scope.modalItem.tags.splice($scope.modalItem.tags.indexOf(tag), 1);
           }
         });
       };
