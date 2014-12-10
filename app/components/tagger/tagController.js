@@ -24,6 +24,10 @@ angular.module('famousAngular')
         $scope.Tags.delete({id: tag.id}, function (data) {
           // success
           $scope.tags.splice($scope.tags.indexOf(tag), 1);
+          if ($scope.filterTagsSelected.indexOf(tag) !== -1) {
+            $scope.filterTagsSelected.splice($scope.filterTagsSelected.indexOf(tag), 1);
+            $scope.tagFilter.active[tag.id] = undefined;
+          }
         });
       };
 
