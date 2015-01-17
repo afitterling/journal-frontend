@@ -1,23 +1,25 @@
 <div class="partial" ng-controller="DataCtrl as ctrl">
     <!-- Tag Modal -->
     <div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-            ng-controller="TagCtrl"
+         ng-controller="TagCtrl"
             >
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <!--<button type="button" class="close" data-dismiss="modal"><span-->
-                            <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                    <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
                     <h4 class="modal-title" id="myModalLabel">Tags</h4>
                 </div>
                 <div class="modal-body">
                     <h4 class="modal-title" id="myModalLabel">new tag</h4>
+
                     <form name="tagForm" ng-submit="addTag(tag)" novalidate>
                         <div class="input-group">
                             <input type="text" ng-model="tag.name" name="name" ng-required="true" class="form-control">
                           <span class="input-group-btn">
                               <!-- @TODO check if name is already on server -->
-                            <button class="btn btn-default" type="button" ng-click="addTag(tag)" ng-class="{'btn-success': tagForm.$valid}">
+                            <button class="btn btn-default" type="button" ng-click="addTag(tag)"
+                                    ng-class="{'btn-success': tagForm.$valid}">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                           </span>
@@ -27,33 +29,37 @@
                 </div>
                 <div class="modal-header">
                     <!--<button type="button" class="close" data-dismiss="modal"><span-->
-                            <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                    <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
                 </div>
                 <div class="modal-body">
                     <h4 class="modal-title" id="myModalLabel" ng-show="!tags.length">no tags available</h4>
                     <h4 class="modal-title" id="myModalLabel" ng-show="tags.length">available tags</h4>
                     <span ng-repeat-start="tag in tags" class="label label-info">
-                        <span ng-click="tagItem(tag)" data-toggle="tooltip" data-placement="top" title="click to tag!">{{tag.name}}</span>&nbsp;<span class="text-danger glyphicon glyphicon-remove"
-                                                                ng-click="deleteTag(tag)" data-toggle="tooltip" data-placement="top" title="click to remove!"></span></span>
+                        <span ng-click="tagItem(tag)" data-toggle="tooltip" data-placement="top" title="click to tag!">{{tag.name}}</span>&nbsp;<span
+                            class="text-danger glyphicon glyphicon-remove"
+                            ng-click="deleteTag(tag)" data-toggle="tooltip" data-placement="top"
+                            title="click to remove!"></span></span>
                     <span ng-repeat-end ng-hide="$last"> </span>
                     <!--<span class="label label-info">Label1 <span class="glyphicon glyphicon-remove"-->
-                                                                <!--ng-click=""></span></span>-->
+                    <!--ng-click=""></span></span>-->
                     <!--<span class="label label-info">Label1 <span class="glyphicon glyphicon-remove"-->
-                                                                <!--ng-click=""></span></span>-->
+                    <!--ng-click=""></span></span>-->
                     <!--<span class="label label-info">Label1 <span class="glyphicon glyphicon-remove"-->
-                                                                <!--ng-click=""></span></span>-->
+                    <!--ng-click=""></span></span>-->
                 </div>
                 <div class="modal-header">
                     <!--<button type="button" class="close" data-dismiss="modal"><span-->
-                            <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                    <!--aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
                 </div>
                 <div class="modal-body">
-                    <h4 class="modal-title" id="myModalLabel" ng-show="!modalItem.tags.length">entry currently not tagged</h4>
+                    <h4 class="modal-title" id="myModalLabel" ng-show="!modalItem.tags.length">entry currently not
+                        tagged</h4>
                     <h4 class="modal-title" id="myModalLabel" ng-show="modalItem.tags.length">entry tagged with</h4>
                     <span ng-repeat-start="tag in modalItem.tags" class="label label-info">
-                        <span ng-click="tagItem(tag)">{{tag.name}}</span>&nbsp;<span class="text-danger glyphicon glyphicon-remove"
-                                                                                ng-click="removeTag(tag)"
-                                                                                data-toggle="tooltip" data-placement="top" title="click to remove!"></span></span>
+                        <span ng-click="tagItem(tag)">{{tag.name}}</span>&nbsp;<span
+                            class="text-danger glyphicon glyphicon-remove"
+                            ng-click="removeTag(tag)"
+                            data-toggle="tooltip" data-placement="top" title="click to remove!"></span></span>
                     <span ng-repeat-end ng-hide="$last"></span>
                 </div>
                 <div class="modal-footer">
@@ -64,16 +70,51 @@
         </div>
     </div>
 
-    <div class="row" ng-show="tags.length">
+
+    <input ng-click="multiple=!multiple" type="checkbox"><span>selected multiple</span>
+
+    <div class="row" ng-show="!multiple">
         <div class="col-lg-6">
-            <button ng-click="resetFilter()" ng-show="filterTagsSelected.length" class="btn btn-default btn-warning btn-sm"
-                    ng-class="">Disable Filters</button>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-expanded="true">
+                    {{filterTagsSelected[0].name || 'none selected' }}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li ng-click="resetFilter()" role="presentation"><a role="menuitem"
+                                                                        tabindex="-1"
+                                                                        href="#">None</a>
+                    <li ng-repeat="tag in tags" ng-click="selectFilter(tag)" role="presentation"><a role="menuitem"
+                                                                                                    tabindex="-1"
+                                                                                                    href="#">{{tag.name}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--<div class="col-lg-6">-->
+            <!--<button class="btn btn-default" ng-click="openTagModal()">Tag Dialog</button>-->
+        <!--</div>-->
+    </div>
+
+
+    <div class="row" ng-show="multiple && tags.length">
+        <div class="col-lg-6">
+            <button ng-click="resetFilter()" ng-show="filterTagsSelected.length"
+                    class="btn btn-default btn-warning btn-sm"
+                    ng-class="">Disable Filters
+            </button>
+
             <button ng-click="toggleTagFilter(tag)" ng-repeat="tag in tags" class="btn btn-default btn-info btn-sm"
-                    ng-class="{'active': tagFilter.active[tag.id]}">{{tag.name}}</button>
+                    ng-class="{'active': tagFilter.active[tag.id]}">{{tag.name}}
+            </button>
             <br>
             <br>
         </div>
     </div>
+    <br>
+
     <!-- editable list to display editable tables -->
     <div class="row">
         <div class="col-lg-6">
@@ -84,9 +125,9 @@
                            delete-func="deleteItem(item)"
                            modal-func="openTagModal(item)"
                     ></editable-list>
-            <!-- item arg wird durchgereicht von editable! -->
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-6">
             <form role="form" name="formAdd" ng-submit="addItem(item)" novalidate>

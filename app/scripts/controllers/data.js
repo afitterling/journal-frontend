@@ -100,6 +100,11 @@ angular.module('famousAngular')
 
     $scope.resetFilter(); // first run reset
 
+    $scope.selectFilter = function (tag) {
+      $scope.filterTagsSelected = [];
+      $scope.filterTagsSelected.push(tag);
+    };
+
     $scope.toggleTagFilter = function (tag) {
       if ($scope.filterTagsSelected.indexOf(tag) >= 0) {
         $scope.filterTagsSelected.splice($scope.filterTagsSelected.indexOf(tag), 1);
