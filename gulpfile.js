@@ -42,19 +42,34 @@ gulp.task('partials', function () {
     .pipe(gulp.dest('dist/partials'));
 });
 
+gulp.task('images', function () {
+  gulp.src('./app/images/**/*')
+    .pipe(gulp.dest('dist/images'));
+});
+
+
 gulp.task('components', function () {
   gulp.src('./app/components/**/*.html')
     .pipe(gulp.dest('dist/components'));
 });
 
 
-gulp.task('settings', function () {
+gulp.task('settings-staging', function () {
+  gulp.src('./settings/staging.json')
+    .pipe(rename('settings.json'))
+    .pipe(gulp.dest('dist/'));
+  gulp.src('app/auth0-variables.js')
+    .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('settings-production', function () {
   gulp.src('./settings/production.json')
     .pipe(rename('settings.json'))
     .pipe(gulp.dest('dist/'));
   gulp.src('app/auth0-variables.js')
     .pipe(gulp.dest('dist/'));
 });
+
 
 gulp.task('watch', ['connect'], function () {
 
@@ -70,7 +85,7 @@ gulp.task('watch', ['connect'], function () {
   gulp.watch('app/images/**/*', ['images']);
 });
 
-gulp.task('build', ['sass', 'html', 'styles', 'images', 'fonts', 'partials', 'components', 'settings']);
+gulp.task('build', ['sass', 'html', 'styles', 'images', 'fonts', 'partials', 'components']);
 
 gulp.task('default', ['connect', 'watch'], function () {
   gulp.start('build');
