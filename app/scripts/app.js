@@ -14,7 +14,8 @@ angular.module('famousAngular',
       'directives.formHelpers',
       'famousAngular.formHelpers.editables',
       'famous.angular',
-      'pascalprecht.translate'
+      'pascalprecht.translate',
+      'ngMaterial'
     ])
 
   .config(['SettingsProvider', '$httpProvider', '$resourceProvider', '$stateProvider', 'authProvider', 'jwtInterceptorProvider', '$logProvider', '$locationProvider', '$urlRouterProvider', '$provide',
