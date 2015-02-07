@@ -36,7 +36,7 @@
 
 </head>
 
-<body layout="column" ng-cloak>
+<body ng-cloak>
 
 <!--<hr>-->
 <!--<nav style="border: 1px dashed silver; color: white;" class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
@@ -69,7 +69,7 @@
     <!--</div>-->
 <!--</nav>-->
 <!--<hr>-->
-<md-content>
+<!--<md-content>-->
     <!--<md-toolbar>-->
         <!--<h2 class="md-toolbar-tools">-->
             <!--<span>Toolbar</span>-->
@@ -79,10 +79,10 @@
     <!--<br>-->
     <md-toolbar class="md-tall">
         <h1 class="md-toolbar-tools">
-            <span>Journal /b</span>
+            <span>Journal</span>
         </h1>
     </md-toolbar>
-</md-content>
+<!--</md-content>-->
 
 <!--<md-tabs md-selected="">-->
     <!--<md-tab label="title">-->
@@ -95,12 +95,12 @@
     <!--</md-tab>-->
 <!--</md-tabs>-->
 
-<div ng-controller="AppCtrl" class="sample">
-    <md-tabs md-selected="selectedIndex">
-        <md-tab ng-repeat="tab in tabs"
+<div ng-controller="AppCtrl as ctrl" class="sample">
+    <md-tabs md-selected="selectedIndex" shaddow>
+        <md-tab ng-repeat="tab in ctrl.tabs"
                 ng-disabled="tab.disabled"
                 label="{{tab.title}}">
-            <div class="container" ui-view class="column" layout-fill layout-align="space-around center"></div>
+            <div class="container" ui-view layout-fill layout-align="space-around center"></div>
             <!--<div class="demo-tab tab{{$index%4}}" layout="column" layout-fill layout-align="space-around center">-->
                 <!--<div ng-bind="tab.content"></div>-->
                 <!--<md-button class="md-warn" ng-click="removeTab( tab )">-->

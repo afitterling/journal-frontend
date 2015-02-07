@@ -1,27 +1,17 @@
-<div class="partial">
-    <form role="form" ng-disabled="true">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" ng-model="profile.email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" disabled>
-        </div>
-        <!--<div class="form-group">-->
-            <!--<label for="exampleInputPassword1">Password</label>-->
-            <!--<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label for="exampleInputFile">File input</label>-->
-            <!--<input type="file" id="exampleInputFile">-->
-            <!--<p class="help-block">Example block-level help text here.</p>-->
-        <!--</div>-->
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="profile.email_verified" disabled> Confirmed
-            </label>
-        </div>
-        <!--<button type="submit" class="btn btn-default">Submit</button>-->
-    </form>
+<md-content md-theme="docs-dark" class="md-padding" layout-sm="column">
+    <md-input-container>
+        <label>Name</label>
+        <input ng-model="profile.name" ng-disabled="true">
+    </md-input-container>
+    <md-input-container>
+        <label>Email</label>
+        <input ng-model="profile.email" type="email" ng-disabled="true">
+    </md-input-container>
 
-    <article ng-show="settings.debug">
-        <pre>{{auth.profile | json}}</pre>
-    </article>
-</div>
+    <!--<span>Profile verified</span>-->
+    <md-checkbox ng-disabled="true" ng-model="profile.email_verified"></md-checkbox>
+</md-content>
+
+<!--<article ng-show="settings.debug">-->
+    <!--<pre>{{profile | json}}</pre>-->
+<!--</article>-->

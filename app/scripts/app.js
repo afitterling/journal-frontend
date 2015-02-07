@@ -11,9 +11,9 @@ angular.module('famousAngular',
       'ngResource',
       'ui.router',
       'angular-storage',
-      'directives.formHelpers',
-      'famousAngular.formHelpers.editables',
-      'famous.angular',
+      //'directives.formHelpers',
+      //'famousAngular.formHelpers.editables',
+      //'famous.angular',
       'pascalprecht.translate',
       'ngMaterial'
     ])
@@ -64,7 +64,7 @@ angular.module('famousAngular',
             $log.debug('profile resolved:', profile);
           });
 
-          $location.path('/profile');
+          //$location.path('/profile');
           $rootScope.$broadcast('sig:::profileLoaded');
 
         }]);
@@ -83,52 +83,65 @@ angular.module('famousAngular',
           AppStore.set('items', null);
 
           $rootScope.profile = auth.profile;
-          $location.path('/profile');
+          //$location.path('/profile');
           $rootScope.$broadcast('sig:::profileLoaded');
         }]);
 
       authProvider.on('loginFailure', ['$location', function ($location) {
-        $location.path('/error');
+//        $location.path('/error');
       }]);
+
+
+      ///////////////////////////////////////////////////////////////////////////////////
+      // ui states
 
       $stateProvider
         .state('home', {
           url: '/',
-          templateUrl: 'partials/main.html',
-          controller: 'MainCtrl',
+          templateUrl: 'partials/home.html',
+          //controller: 'MainCtrl',
           data: {
           }
         });
 
       $stateProvider
-        .state('data', {
-          url: '/entries',
-          templateUrl: 'partials/entries.html',
-          //controller: 'DataCtrl', // see the partial ng-ctrl
-          resolve: {
-            conf: ['Settings', function (Settings) {
-              return Settings;
-            }],
-            items: ['AppStore', function (AppStore) {
-              return AppStore.get('items'); // will return q not the items directly so it is resolvable
-            }]
-          },
-          controller: ['$scope', 'conf', 'items', function ($scope, conf, items) {
-            $scope.conf = conf;
-            $scope.items = items;
-          }],
+        .state('journal', {
+          url: '/journal',
+          templateUrl: 'partials/journal.html',
+//          controller: 'MainCtrl',
           data: {
-            restricted: true,
-            api: true
           }
         });
 
-      $stateProvider
-        .state('error', {
-          url: '/error',
-          templateUrl: 'partials/error.html',
-          data: {}
-        });
+//      $stateProvider
+//        .state('data', {
+//          url: '/entries',
+//          templateUrl: 'partials/entries.html',
+//          //controller: 'DataCtrl', // see the partial ng-ctrl
+//          resolve: {
+//            conf: ['Settings', function (Settings) {
+//              return Settings;
+//            }],
+//            items: ['AppStore', function (AppStore) {
+//              return AppStore.get('items'); // will return q not the items directly so it is resolvable
+//            }]
+//          },
+//          controller: ['$scope', 'conf', 'items', function ($scope, conf, items) {
+//            $scope.conf = conf;
+//            $scope.items = items;
+//          }],
+//          data: {
+//            restricted: true,
+//            api: true
+//          }
+//        });
+
+//      $stateProvider
+//        .state('error', {
+//          url: '/error',
+//          templateUrl: 'partials/error.html',
+//          data: {}
+//        });
 
       $stateProvider
         .state('profile', {
@@ -139,17 +152,19 @@ angular.module('famousAngular',
           }
         });
 
-      $stateProvider
-        .state('404', {
-          url: '/404',
-          templateUrl: 'partials/404.html',
-          data: {
-            restricted: null
-          }
-        });
+//      $stateProvider
+//        .state('404', {
+//          url: '/404',
+//          templateUrl: 'partials/404.html',
+//          data: {
+//            restricted: null
+//          }
+//        });
 
       $urlRouterProvider.otherwise('/');
-      $locationProvider.html5Mode(true).hashPrefix('!');
+
+      // @TODO move to provider setup loading settings from disk
+      //$locationProvider.html5Mode(true).hashPrefix('!');
 
     }])
   .run(['$log', 'auth', '$location', '$rootScope', 'Settings', 'Items', 'jwtHelper', 'store', '$resource', 'AppStore',
@@ -157,13 +172,13 @@ angular.module('famousAngular',
 
       auth.hookEvents();
 
-      $rootScope.goTo = function (arg) {
-        $location.path(arg);
-      };
+//      $rootScope.goTo = function (arg) {
+//        $location.path(arg);
+//      };
 
-      $rootScope.$on('onError', function(){
-        $location.path('/error');
-      });
+//      $rootScope.$on('onError', function(){
+//        $location.path('/error');
+//      });
 
       $rootScope.handleSession = function () {
         if (!auth.isAuthenticated) {
@@ -175,7 +190,7 @@ angular.module('famousAngular',
           }, function (profile, token) {
             store.set('profile', profile);
             store.set('token', token);
-            $location.path('/profile');
+            //$location.path('/profile');
             $log.debug('login success:', true);
           }, function (err) {
             console.log('Error:', err);
@@ -225,16 +240,16 @@ angular.module('famousAngular',
       };
 
       // on profile load (authenticate/login)
-      $rootScope.$on('sig:::profileLoaded', function () {
-        Settings.then(function (conf) {
-          apiCall(conf);
-          var items = Items(conf);
-          /* jshint camelcase: false */
-          items.query({user_id: auth.profile.user_id}, function (items) {
-            AppStore.set('items', items);
-          });
-        });
-      });
+//      $rootScope.$on('sig:::profileLoaded', function () {
+//        Settings.then(function (conf) {
+//          apiCall(conf);
+//          var items = Items(conf);
+//          /* jshint camelcase: false */
+//          items.query({user_id: auth.profile.user_id}, function (items) {
+//            AppStore.set('items', items);
+//          });
+//        });
+//      });
 
     }]
   );
